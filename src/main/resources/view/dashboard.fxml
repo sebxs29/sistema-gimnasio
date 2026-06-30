@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.DashboardController">
+    <left>
+
+        <VBox fx:id="menuLateral"
+              spacing="10"
+              prefWidth="220"
+              styleClass="menu">
+
+            <Label text="Sistema Gimnasio"
+                   styleClass="titulo"/>
+
+            <Button fx:id="btnClientes"
+                    text="Clientes"
+                    onAction="#abrirClientes"/>
+
+            <Button fx:id="btnEntrenadores"
+                    text="Entrenadores"
+                    onAction="#abrirEntrenadores"/>
+
+            <Button fx:id="btnPlanes"
+                    text="Planes"
+                    onAction="#abrirPlanes"/>
+
+            <Button fx:id="btnMembresias"
+                    text="Membresías"
+                    onAction="#abrirMembresias"/>
+
+            <Button fx:id="btnRutinas"
+                    text="Rutinas"
+                    onAction="#abrirRutinas"/>
+
+            <Button fx:id="btnAsignarRutinas"
+                    text="Asignar Rutinas"/>
+
+            <Button fx:id="btnMiRutina"
+                    text="Mi Rutina"/>
+
+            <Button fx:id="btnMiMembresia"
+                    text="Mi Membresía"/>
+
+            <Button fx:id="btnReportes"
+                    text="Reportes"/>
+
+            <Pane VBox.vgrow="ALWAYS"/>
+
+            <Button fx:id="btnCerrarSesion"
+                    text="Cerrar Sesión"
+                    onAction="#cerrarSesion"/>
+
+        </VBox>
+
+    </left>
+
+    <!-- CONTENIDO -->
+
+    <center>
+
+        <AnchorPane fx:id="paneContenido"
+                    styleClass="contenido"/>
+
+    </center>
+
+</BorderPane>
