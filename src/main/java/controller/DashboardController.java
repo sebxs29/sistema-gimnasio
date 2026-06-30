@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class DashboardController {
 
+    @FXML private AnchorPane paneContenido;
     @FXML private Button btnClientes;
     @FXML private Button btnEntrenadores;
     @FXML private Button btnPlanes;
@@ -23,55 +24,115 @@ public class DashboardController {
     @FXML private Button btnMiRutina;
     @FXML private Button btnMiMembresia;
     @FXML private Button btnReportes;
-    @FXML private AnchorPane paneContenido;
+    @FXML private Button btnCerrarSesion;
+
+    private Usuario usuario;
+
+    //Recibe el usuario que inició sesión.
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        configurarMenu();
+    }
 
 
+    private void ocultarTodo() {
+        ocultarBoton(btnClientes);
+        ocultarBoton(btnEntrenadores);
+        ocultarBoton(btnPlanes);
+        ocultarBoton(btnMembresias);
+        ocultarBoton(btnRutinas);
+        ocultarBoton(btnAsignarRutinas);
+        ocultarBoton(btnMiRutina);
+        ocultarBoton(btnMiMembresia);
+        ocultarBoton(btnReportes);
+    }
 
-    @FXML
-    public void abrirClientes(){
 
+    private void configurarMenu() {
+        ocultarTodo();
+        String rol = usuario.getRol();
+        switch (rol) {
+            case "ADMINISTRADOR":
+                mostrarBoton(btnClientes);
+                mostrarBoton(btnEntrenadores);
+                mostrarBoton(btnPlanes);
+                mostrarBoton(btnMembresias);
+                mostrarBoton(btnReportes);
+                break;
+            case "ENTRENADOR":
+                mostrarBoton(btnClientes);
+                mostrarBoton(btnRutinas);
+                mostrarBoton(btnAsignarRutinas);
+                break;
+            case "CLIENTE":
+                mostrarBoton(btnMiRutina);
+                mostrarBoton(btnMiMembresia);
+                break;
+        }
+    }
 
+    private void mostrarBoton(Button boton) {
+        boton.setVisible(true);
+        boton.setManaged(true);
+    }
 
+    private void ocultarBoton(Button boton) {
+        boton.setVisible(false);
+        boton.setManaged(false);
+    }
+
+    private void cargarVista(String vista) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/" + vista));
+            Node node = loader.load();
+            paneContenido.getChildren().setAll(node);
+            AnchorPane.setTopAnchor(node, 0.0);
+            AnchorPane.setBottomAnchor(node, 0.0);
+            AnchorPane.setLeftAnchor(node, 0.0);
+            AnchorPane.setRightAnchor(node, 0.0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    public void abrirEntrenadores(){
-
-
-
+    private void abrirClientes() {
+        cargarVista("clientes.fxml");
     }
 
     @FXML
-    public void abrirPlanes(){
-
-
-
+    private void abrirEntrenadores() {
+        cargarVista("entrenadores.fxml");
     }
 
     @FXML
-    public void abrirRutinas(){
-
-
-
+    private void abrirPlanes() {
+        cargarVista("planes.fxml");
     }
 
     @FXML
-    public void abrirMembresias(){
-
+    private void abrirMembresias() {
+        cargarVista("membresias.fxml");
     }
+
+    @FXML
+    private void abrirRutinas() {
+        cargarVista("rutinas.fxml");
+    }
+
+
 
     @FXML
     private void cerrarSesion() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            Stage stage = (Stage) btnClientes.getScene().getWindow();
+            Stage stage = (Stage) btnCerrarSesion.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
