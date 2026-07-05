@@ -10,14 +10,12 @@ public class Entrenador {
     private String especialidad;
     private String telefono;
 
-    // Datos de la tabla usuarios
-    private String usuario;
-    private String contrasena;
 
     public Entrenador() {
     }
 
-    public Entrenador(int id, int usuarioId, String cedula, String nombre, String apellido, String especialidad, String telefono, String usuario, String contrasena) {
+
+    public Entrenador(int id, int usuarioId, String cedula, String nombre, String apellido, String especialidad, String telefono) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.cedula = cedula;
@@ -25,19 +23,6 @@ public class Entrenador {
         this.apellido = apellido;
         this.especialidad = especialidad;
         this.telefono = telefono;
-        this.usuario = usuario;
-        this.contrasena = contrasena;
-    }
-
-    public Entrenador(int usuarioId, String cedula, String nombre, String apellido, String especialidad, String telefono, String usuario, String contrasena) {
-        this.usuarioId = usuarioId;
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.especialidad = especialidad;
-        this.telefono = telefono;
-        this.usuario = usuario;
-        this.contrasena = contrasena;
     }
 
     public int getId() {
@@ -95,21 +80,4 @@ public class Entrenador {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
 }
