@@ -125,7 +125,7 @@ public class DashboardController {
     @FXML
     private void cerrarSesion() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) btnCerrarSesion.getScene().getWindow();
