@@ -53,9 +53,9 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
             <Button mnemonicParsing="false" onAction="#guardarCliente" text="Guardar" />
-            <Button mnemonicParsing="false" text="Acualizar" />
-            <Button mnemonicParsing="false" text="Eliminar" />
-            <Button mnemonicParsing="false" text="Limpiar" />
+            <Button mnemonicParsing="false" onAction="#actualizarCliente" text="Actualizar" />
+            <Button mnemonicParsing="false" onAction="#eliminarCliente" text="Eliminar" />
+            <Button mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar" />
          </children>
       </HBox>
       <TableView fx:id="tblClientes" prefHeight="200.0" prefWidth="200.0">

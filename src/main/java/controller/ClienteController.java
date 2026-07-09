@@ -76,6 +76,13 @@ public class ClienteController {
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+
+        tblClientes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                cargarFormulario(newValue);
+            }
+        });
+
     }
 
     @FXML
@@ -99,12 +106,78 @@ public class ClienteController {
             mostrarAlerta(Alert.AlertType.INFORMATION, "Exito", "Cliente guardado correctamente");
 
             cargarClientes();
+            limpiarCampos();
 
         } catch (SQLException e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error de base de datos", e.getMessage());
         } catch (IllegalArgumentException e) {
             mostrarAlerta(Alert.AlertType.WARNING, "Validacion", e.getMessage());
         }
+    }
+
+    @FXML
+    void actualizarCliente() {
+        try {
+
+            Cliente clienteSeleccionado = tblClientes.getSelectionModel().getSelectedItem();
+
+            if (clienteSeleccionado == null) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Cliente", "Seleccione un cliente para actualizar");
+                return;
+            }
+
+            int id = clienteSeleccionado.getId();
+            int usuarioId = clienteSeleccionado.getUsuarioId();
+            String cedula = txtCedula.getText();
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            String telefono = txtTelefono.getText();
+            String correo = txtCorreo.getText();
+            String estado = cbEstado.getValue();
+
+            Cliente clienteActualizado = new Cliente(id, usuarioId, cedula, nombre, apellido, telefono, correo, estado);
+            clienteDAO.actualizar(clienteActualizado);
+
+            mostrarAlerta(Alert.AlertType.INFORMATION,"Exito", "Cliente actualizado correctamente");
+            cargarClientes();
+            limpiarCampos();
+
+        } catch (SQLException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de base de datos", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", e.getMessage());
+        }
+    }
+
+
+    @FXML
+    void eliminarCliente() {
+
+        try {
+            Cliente clienteSeleccionado = tblClientes.getSelectionModel().getSelectedItem();
+
+            if (clienteSeleccionado == null) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Cliente", "Seleccione un cliente para eliminar");
+                return;
+            }
+
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("Confirmar eliminacion");
+            confirmacion.setContentText("Estas seguro de eliminar este cliente? " + clienteSeleccionado.getNombre() + " " + clienteSeleccionado.getApellido());
+
+            if (confirmacion.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
+                return;
+            }
+
+            clienteDAO.eliminar(clienteSeleccionado.getId(), clienteSeleccionado.getUsuarioId());
+            mostrarAlerta(Alert.AlertType.INFORMATION,"Exito", "Cliente eliminado correctamente");
+
+            cargarClientes();
+            limpiarCampos();
+        } catch (SQLException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de base de datos", e.getMessage());
+        }
+
     }
 
     void cargarClientes() {
@@ -123,6 +196,33 @@ public class ClienteController {
 
     }
 
+    void cargarFormulario(Cliente clienteCargado) {
+        txtCedula.setText(clienteCargado.getCedula());
+        txtNombre.setText(clienteCargado.getNombre());
+        txtApellido.setText(clienteCargado.getApellido());
+        txtTelefono.setText(clienteCargado.getTelefono());
+        txtCorreo.setText(clienteCargado.getCorreo());
+        cbEstado.setValue(clienteCargado.getEstado());
+
+        txtUsuario.setDisable(true);
+        txtContrasena.setDisable(true);
+    }
+
+    @FXML
+    void limpiarCampos() {
+        txtCedula.clear();
+        txtNombre.clear();
+        txtApellido.clear();
+        txtTelefono.clear();
+        txtCorreo.clear();
+        txtUsuario.clear();
+        txtContrasena.clear();
+        cbEstado.getSelectionModel().clearSelection();
+        tblClientes.getSelectionModel().clearSelection();
+        txtUsuario.setDisable(false);
+        txtContrasena.setDisable(false);
+
+    }
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
         Alert alert = new Alert(tipo);

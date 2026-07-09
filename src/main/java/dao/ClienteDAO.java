@@ -66,6 +66,8 @@ public class ClienteDAO {
             } catch (SQLException e) {
                 conn.rollback();
                 throw e;
+            } finally {
+                conn.setAutoCommit(true);
             }
         }
     }
@@ -74,12 +76,15 @@ public class ClienteDAO {
         List<Cliente> lista = new ArrayList<>();
 
         String sql = """
-                    SELECT id, usuario_id, cedula, nombre, apellido, telefono, correo, estado
+                    
+                SELECT id, usuario_id, cedula, nombre, apellido, telefono, correo, estado
                     FROM clientes
                     ORDER BY id
                     """;
-        try (Connection connection = Conexion.getConexion();
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (Connection connection = Conexion.
+             getConexion();
+            PreparedStatement ps = connection.
+             prepareStatement(sql);
             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
@@ -99,4 +104,87 @@ public class ClienteDAO {
         return lista;
     }
 
+    public void actualizar(Cliente cliente) throws SQLException {
+        String sql = """
+                UPDATE clientes
+                SET cedula = ?,
+                nombre = ?,
+                apellido = ?,
+                telefono = ?,
+                correo = ?,
+                estado = ?
+                where id = ?
+                """;
+
+        try (Connection
+             connection = Conexion.getConexion();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, cliente.getCedula());
+            ps.setString(2, cliente.getNombre());
+            ps.setString(3, cliente.getApellido());
+            ps.setString(4, cliente.getTelefono());
+            ps.setString(5, cliente.getCorreo());
+            ps.setString(6, cliente.getEstado()
+
+            );
+
+            ps.setInt(7,
+
+            cliente.getId());
+
+           int filas = ps.executeUpdate();
+
+           if (filas == 0) {
+               throw new SQLException("No se encontro el cliente para actualizar");
+           }
+        }
+    }
+
+    public void eliminar(int clienteId, int usuarioId) throws SQLException {
+
+        String sqlCliente = """
+                DELETE from clientes
+                WHERE id = ?
+                """;
+
+        String sqlUsuario = """
+                 DELETE FROM usuarios
+                WHERE id = ?
+                """;
+
+        try(Connection connection = Conexion.getConexion();) {
+
+            try {
+                connection.setAutoCommit(false);
+
+            try (PreparedStatement psCliente = connection.prepareStatement(sqlCliente)) {
+
+                psCliente.setInt(1, clienteId);
+
+                int filas = psCliente.executeUpdate();
+
+                if (filas == 0) {
+                    throw new SQLException("No se encontr eliminar");
+                }
+            }
+
+            try (PreparedStatement psUsuario = connection.prepareStatement(sqlUsuario)) {
+
+                psUsuario.setInt(1, usuarioId);
+
+                psUsuario.executeUpdate();
+
+            }
+            connection.commit();
+
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+
+        } finally {
+                connection.setAutoCommit(true);
+            }
+        }
+    }
 }
