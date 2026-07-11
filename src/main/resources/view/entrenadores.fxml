@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.EntrenadorController">
+
+    <children>
+
+        <VBox spacing="15"
+              AnchorPane.topAnchor="15"
+              AnchorPane.leftAnchor="15"
+              AnchorPane.rightAnchor="15"
+              AnchorPane.bottomAnchor="15">
+
+            <Label text="GESTIÓN DE ENTRENADORES"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <Separator/>
+
+            <GridPane hgap="10" vgap="10">
+
+                <Label text="Cédula:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtCedula"
+                           promptText="Ingrese la cédula"
+                           GridPane.rowIndex="0"
+                           GridPane.columnIndex="1"/>
+
+                <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtNombre"
+                           promptText="Ingrese el nombre"
+                           GridPane.rowIndex="1"
+                           GridPane.columnIndex="1"/>
+
+                <Label text="Apellido:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtApellido"
+                           promptText="Ingrese el apellido"
+                           GridPane.rowIndex="2"
+                           GridPane.columnIndex="1"/>
+
+                <Label text="Especialidad:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cbEspecialidad"
+                          prefWidth="220"
+                          GridPane.rowIndex="3"
+                          GridPane.columnIndex="1"/>
+
+                <Label text="Teléfono:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtTelefono"
+                           promptText="Ingrese el teléfono"
+                           GridPane.rowIndex="4"
+                           GridPane.columnIndex="1"/>
+
+                <Label text="Usuario:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtUsuario"
+                           promptText="Ingrese el usuario"
+                           GridPane.rowIndex="5"
+                           GridPane.columnIndex="1"/>
+
+                <Label text="Contraseña:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <PasswordField fx:id="txtContrasena"
+                               promptText="Ingrese la contraseña"
+                               GridPane.rowIndex="6"
+                               GridPane.columnIndex="1"/>
+
+            </GridPane>
+
+            <HBox spacing="10">
+
+                <Button text="Guardar"
+                        onAction="#guardar"/>
+
+                <Button text="Actualizar"
+                        onAction="#actualizar"/>
+
+                <Button text="Eliminar"
+                        onAction="#eliminar"/>
+
+                <Button text="Limpiar"
+                        onAction="#limpiar"/>
+
+            </HBox>
+
+            <TableView fx:id="tablaEntrenadores"
+                       onMouseClicked="#seleccionarEntrenador"
+                       VBox.vgrow="ALWAYS">
+
+                <columns>
+
+                    <TableColumn fx:id="colId"
+                                 text="ID"
+                                 prefWidth="60"/>
+
+                    <TableColumn fx:id="colCedula"
+                                 text="Cédula"
+                                 prefWidth="120"/>
+
+                    <TableColumn fx:id="colNombre"
+                                 text="Nombre"
+                                 prefWidth="140"/>
+
+                    <TableColumn fx:id="colApellido"
+                                 text="Apellido"
+                                 prefWidth="140"/>
+
+                    <TableColumn fx:id="colEspecialidad"
+                                 text="Especialidad"
+                                 prefWidth="170"/>
+
+                    <TableColumn fx:id="colTelefono"
+                                 text="Teléfono"
+                                 prefWidth="120"/>
+
+                </columns>
+
+            </TableView>
+
+        </VBox>
+
+    </children>
+
+</AnchorPane>
