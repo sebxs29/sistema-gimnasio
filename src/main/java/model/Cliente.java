@@ -43,8 +43,8 @@ public class Cliente {
 
     public void setCedula(String cedula) {
 
-        if (cedula == null || cedula.isBlank()) {
-            throw new IllegalArgumentException("La cedula no puede estar vacia");
+        if (cedula == null || !cedula.matches("\\d{10}")) {
+            throw new IllegalArgumentException("La cedula debe tener 10 digitos");
         }
 
         this.cedula = cedula;
@@ -69,8 +69,8 @@ public class Cliente {
 
     public void setTelefono(String telefono) {
 
-        if (telefono == null || telefono.isBlank()) {
-            throw new IllegalArgumentException("El telefono no puede estar vacio");
+        if (telefono == null || !telefono.matches("\\d{10}")) {
+            throw new IllegalArgumentException("El telefono debe tener 10 digitos");
         }
 
         this.telefono = telefono;

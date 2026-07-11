@@ -90,6 +90,14 @@ public class ClienteController {
 
         try {
 
+            if (!validarCamposCliente()) {
+                return;
+            }
+
+            if (!validarCredenciales()) {
+                return;
+            }
+
             String cedula = txtCedula.getText();
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
@@ -119,10 +127,15 @@ public class ClienteController {
     void actualizarCliente() {
         try {
 
+
             Cliente clienteSeleccionado = tblClientes.getSelectionModel().getSelectedItem();
 
             if (clienteSeleccionado == null) {
                 mostrarAlerta(Alert.AlertType.ERROR, "Cliente", "Seleccione un cliente para actualizar");
+                return;
+            }
+
+            if (!validarCamposCliente()) {
                 return;
             }
 
@@ -232,4 +245,52 @@ public class ClienteController {
         alert.showAndWait();
     }
 
+    private boolean validarCamposCliente() {
+        if (txtCedula.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", "La cedula es obligatoria");
+            return false;
+        }
+
+        if (txtNombre.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", "El nombre es obligatorio");
+            return false;
+        }
+
+        if (txtApellido.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", "El apellido es obligatorio");
+            return false;
+        }
+
+        if (txtTelefono.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", "El telefono es obligatorio");
+            return false;
+        }
+
+        if (txtCorreo.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", "El correo es obligatorio");
+            return false;
+        }
+
+        if (cbEstado.getValue() == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", "Debe seleccionar un estado");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validarCredenciales() {
+
+        if (txtUsuario.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", "El usuario es obligatorio");
+            return false;
+        }
+
+        if (txtContrasena.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validacion", "La contraseña es obligatoria");
+            return false;
+        }
+
+        return true;
+    }
 }
