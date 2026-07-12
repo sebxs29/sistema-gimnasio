@@ -45,13 +45,13 @@
             <Label text="Usuario:" GridPane.rowIndex="5" />
             <Label text="Contraseña:" GridPane.rowIndex="6" />
             <Label text="Estado:" GridPane.rowIndex="7" />
-            <TextField fx:id="txtCedula" promptText="Ingrese la cédula" GridPane.columnIndex="1" />
-            <TextField fx:id="txtNombre" promptText="Ingrese el nombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtApellido" promptText="Ingrese el apellido" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtTelefono" promptText="Ingrese el telefono" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtCorreo" promptText="Ingrese el correo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="txtUsuario" promptText="Ingrese el usuario" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <PasswordField fx:id="txtContrasena" promptText="Ingrese la contraseña" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="txtCedula" promptText="1234567890" GridPane.columnIndex="1" />
+            <TextField fx:id="txtNombre" promptText="Sebastián" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtApellido" promptText="Toapanta" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtTelefono" promptText="0984969316" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtCorreo" promptText="sebas29t@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtUsuario" promptText="sebxs29" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <PasswordField fx:id="txtContrasena" promptText="••••••••" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <ComboBox fx:id="cbEstado" prefHeight="26.0" promptText="Seleccione" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>

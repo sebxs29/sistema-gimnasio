@@ -231,7 +231,9 @@ public class ClienteController {
         txtUsuario.clear();
         txtContrasena.clear();
         cbEstado.getSelectionModel().clearSelection();
+
         tblClientes.getSelectionModel().clearSelection();
+
         txtUsuario.setDisable(false);
         txtContrasena.setDisable(false);
 
