@@ -76,11 +76,10 @@ public class ClienteDAO {
         List<Cliente> lista = new ArrayList<>();
 
         String sql = """
-                    
                 SELECT id, usuario_id, cedula, nombre, apellido, telefono, correo, estado
-                    FROM clientes
-                    ORDER BY id
-                    """;
+                FROM clientes
+                ORDER BY id
+                """;
         try (Connection connection = Conexion.
              getConexion();
             PreparedStatement ps = connection.
@@ -125,13 +124,8 @@ public class ClienteDAO {
             ps.setString(3, cliente.getApellido());
             ps.setString(4, cliente.getTelefono());
             ps.setString(5, cliente.getCorreo());
-            ps.setString(6, cliente.getEstado()
-
-            );
-
-            ps.setInt(7,
-
-            cliente.getId());
+            ps.setString(6, cliente.getEstado());
+            ps.setInt(7, cliente.getId());
 
            int filas = ps.executeUpdate();
 
@@ -153,7 +147,7 @@ public class ClienteDAO {
                 WHERE id = ?
                 """;
 
-        try(Connection connection = Conexion.getConexion();) {
+        try(Connection connection = Conexion.getConexion()) {
 
             try {
                 connection.setAutoCommit(false);
@@ -165,7 +159,7 @@ public class ClienteDAO {
                 int filas = psCliente.executeUpdate();
 
                 if (filas == 0) {
-                    throw new SQLException("No se encontr eliminar");
+                    throw new SQLException("No se encontro el cliente para eliminar");
                 }
             }
 
