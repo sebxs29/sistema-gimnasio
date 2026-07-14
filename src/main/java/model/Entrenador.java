@@ -17,12 +17,12 @@ public class Entrenador {
 
     public Entrenador(int id, int usuarioId, String cedula, String nombre, String apellido, String especialidad, String telefono) {
         this.id = id;
-        this.usuarioId = usuarioId;
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.especialidad = especialidad;
-        this.telefono = telefono;
+        setUsuarioId(usuarioId);
+        setCedula(cedula);
+        setNombre(nombre);
+        setApellido(apellido);
+        setEspecialidad(especialidad);
+        setTelefono(telefono);
     }
 
     public int getId() {
@@ -30,6 +30,9 @@ public class Entrenador {
     }
 
     public void setId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("El ID no puede ser negativo.");
+        }
         this.id = id;
     }
 
@@ -38,6 +41,9 @@ public class Entrenador {
     }
 
     public void setUsuarioId(int usuarioId) {
+        if (usuarioId <= 0) {
+            throw new IllegalArgumentException("El ID del usuario debe ser mayor a 0.");
+        }
         this.usuarioId = usuarioId;
     }
 
@@ -46,6 +52,9 @@ public class Entrenador {
     }
 
     public void setCedula(String cedula) {
+        if (cedula == null || !cedula.matches("\\d{10}")) {
+            throw new IllegalArgumentException("La cédula debe tener exactamente 10 dígitos.");
+        }
         this.cedula = cedula;
     }
 
@@ -54,6 +63,9 @@ public class Entrenador {
     }
 
     public void setNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre es obligatorio.");
+        }
         this.nombre = nombre;
     }
 
@@ -62,6 +74,9 @@ public class Entrenador {
     }
 
     public void setApellido(String apellido) {
+        if (apellido == null || apellido.trim().isEmpty()) {
+            throw new IllegalArgumentException("El apellido es obligatorio.");
+        }
         this.apellido = apellido;
     }
 
@@ -70,6 +85,14 @@ public class Entrenador {
     }
 
     public void setEspecialidad(String especialidad) {
+        if (especialidad == null ||
+                (!especialidad.equals("Musculacion") &&
+                        !especialidad.equals("Calistenia") &&
+                        !especialidad.equals("Powerlifting"))) {
+
+            throw new IllegalArgumentException(
+                    "La especialidad debe ser Musculacion, Calistenia o Powerlifting.");
+        }
         this.especialidad = especialidad;
     }
 
@@ -78,6 +101,10 @@ public class Entrenador {
     }
 
     public void setTelefono(String telefono) {
+        if (telefono == null || !telefono.matches("\\d{10}")) {
+            throw new IllegalArgumentException("El teléfono debe tener exactamente 10 dígitos.");
+        }
         this.telefono = telefono;
     }
+
 }

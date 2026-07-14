@@ -40,9 +40,8 @@ public class EntrenadorController {
 
     @FXML private TableColumn<Entrenador, String> colTelefono;
 
-    private final EntrenadorDAO dao = new EntrenadorDAO();
-    private final ObservableList<Entrenador> lista = FXCollections.observableArrayList();
-    private Entrenador entrenadorSeleccionado;
+    private EntrenadorDAO entrenadorDAO= new EntrenadorDAO();
+    private ObservableList<Entrenador> lista = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -54,15 +53,23 @@ public class EntrenadorController {
         colEspecialidad.setCellValueFactory(new PropertyValueFactory<>("especialidad"));
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         cargarEntrenadores();
-        tablaEntrenadores.setOnMouseClicked(e -> seleccionarEntrenador());
+
+        tablaEntrenadores.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, nuevoValor) -> {
+            if (nuevoValor != null) {
+                cargarFormulario(nuevoValor);
+            }
+        });
     }
 
     @FXML
     private void guardar() {
-        if (!validarCampos()) {
-            return;
-        }
         try {
+            if (!validarCamposEntrenador()) {
+                return;
+            }
+            if (!validarCredenciales()) {
+                return;
+            }
             Entrenador entrenador = new Entrenador();
 
             entrenador.setCedula(txtCedula.getText());
@@ -71,83 +78,104 @@ public class EntrenadorController {
             entrenador.setEspecialidad(cbEspecialidad.getValue());
             entrenador.setTelefono(txtTelefono.getText());
 
-            dao.guardar(entrenador, txtUsuario.getText(), txtContrasena.getText());
+            entrenadorDAO.guardar(entrenador, txtUsuario.getText(), txtContrasena.getText());
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Entrenador guardado correctamente.");
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Entrenador registrado correctamente.");
-            alert.showAndWait();
             cargarEntrenadores();
             limpiar();
-        } catch (SQLException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText(ex.getMessage());
-            alert.showAndWait();
+        } catch (IllegalArgumentException e) {
+
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", e.getMessage());
+
+        } catch (SQLException e) {
+
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de base de datos", e.getMessage());
         }
+
     }
+
 
     @FXML
     private void actualizar() {
-        if (entrenadorSeleccionado == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Seleccione un entrenador.");
-            alert.showAndWait();
-            return;
 
-        }
-        if (!validarCampos()) {
+        Entrenador entrenadorSeleccionado = tablaEntrenadores.getSelectionModel().getSelectedItem();
+
+        if (entrenadorSeleccionado == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Advertencia", "Seleccione un entrenador para actualizar.");
             return;
         }
+
+        if (!validarCamposEntrenador()) {
+            return;
+        }
+
         try {
             entrenadorSeleccionado.setCedula(txtCedula.getText());
             entrenadorSeleccionado.setNombre(txtNombre.getText());
             entrenadorSeleccionado.setApellido(txtApellido.getText());
             entrenadorSeleccionado.setEspecialidad(cbEspecialidad.getValue());
             entrenadorSeleccionado.setTelefono(txtTelefono.getText());
-
-            dao.actualizar(entrenadorSeleccionado);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Entrenador actualizado correctamente.");
-            alert.showAndWait();
-
+            entrenadorDAO.actualizar(entrenadorSeleccionado);
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Entrenador actualizado correctamente.");
             cargarEntrenadores();
             limpiar();
-
-        } catch (SQLException ex) {
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(ex.getMessage());
-            alert.showAndWait();
+        } catch (IllegalArgumentException e) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", e.getMessage());
+        } catch (SQLException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de base de datos", e.getMessage());
         }
     }
+
     @FXML
     private void eliminar() {
+        Entrenador entrenadorSeleccionado = tablaEntrenadores.getSelectionModel().getSelectedItem();
         if (entrenadorSeleccionado == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Seleccione un entrenador.");
-            alert.showAndWait();
+            mostrarAlerta(Alert.AlertType.WARNING, "Advertencia", "Seleccione un entrenador para eliminar.");
+            return;
+        }
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+
+        confirmacion.setTitle("Confirmar eliminación");
+        confirmacion.setHeaderText(null);
+        confirmacion.setContentText("¿Está seguro de eliminar al entrenador " + entrenadorSeleccionado.getNombre() + " " + entrenadorSeleccionado.getApellido() + "?");
+
+        if (confirmacion.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
             return;
         }
         try {
-            dao.eliminar(entrenadorSeleccionado.getId(), entrenadorSeleccionado.getUsuarioId());
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Entrenador eliminado.");
-            alert.showAndWait();
+            entrenadorDAO.eliminar(entrenadorSeleccionado.getId(), entrenadorSeleccionado.getUsuarioId());
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Entrenador eliminado correctamente.");
 
             cargarEntrenadores();
             limpiar();
 
-        } catch (SQLException ex) {
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(ex.getMessage());
-            alert.showAndWait();
-
+        } catch (SQLException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de base de datos", e.getMessage());
         }
     }
+
+    private void cargarEntrenadores() {
+        try {
+            lista.clear();
+            lista.addAll(entrenadorDAO.listar());
+            tablaEntrenadores.setItems(lista);
+        } catch (SQLException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de base de datos", e.getMessage());
+        }
+    }
+
+
+    private void cargarFormulario(Entrenador entrenador) {
+        txtCedula.setText(entrenador.getCedula());
+        txtNombre.setText(entrenador.getNombre());
+        txtApellido.setText(entrenador.getApellido());
+        txtTelefono.setText(entrenador.getTelefono());
+        cbEspecialidad.setValue(entrenador.getEspecialidad());
+        // Bloquear usuario y contraseña al actualizar
+        txtUsuario.setDisable(true);
+        txtContrasena.setDisable(true);
+    }
+
 
     @FXML
     private void limpiar() {
@@ -157,53 +185,60 @@ public class EntrenadorController {
         txtTelefono.clear();
         txtUsuario.clear();
         txtContrasena.clear();
-        cbEspecialidad.setValue(null);
-        entrenadorSeleccionado = null;
+        cbEspecialidad.getSelectionModel().clearSelection();
         tablaEntrenadores.getSelectionModel().clearSelection();
+        // Habilitar para nuevo registro
+        txtUsuario.setDisable(false);
+        txtContrasena.setDisable(false);
     }
 
-    @FXML
-    private void seleccionarEntrenador() {
-        entrenadorSeleccionado = tablaEntrenadores.getSelectionModel().getSelectedItem();
-        if (entrenadorSeleccionado != null) {
-            txtCedula.setText(entrenadorSeleccionado.getCedula());
-            txtNombre.setText(entrenadorSeleccionado.getNombre());
-            txtApellido.setText(entrenadorSeleccionado.getApellido());
-            txtTelefono.setText(entrenadorSeleccionado.getTelefono());
-            cbEspecialidad.setValue(entrenadorSeleccionado.getEspecialidad());
-        }
-    }
 
-    private void cargarEntrenadores() {
-        try {
-            lista.clear();
-            lista.addAll(dao.listar());
-            tablaEntrenadores.setItems(lista);
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
-
-    }
-
-    private boolean validarCampos() {
-
-        if (txtCedula.getText().isBlank()
-                || txtNombre.getText().isBlank()
-                || txtApellido.getText().isBlank()
-                || txtTelefono.getText().isBlank()
-                || txtUsuario.getText().isBlank()
-                || txtContrasena.getText().isBlank()
-                || cbEspecialidad.getValue() == null) {
-
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Complete todos los campos.");
-            alert.showAndWait();
-
+    private boolean validarCamposEntrenador() {
+        if (txtCedula.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", "La cédula es obligatoria.");
             return false;
         }
-
+        if (txtNombre.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", "El nombre es obligatorio.");
+            return false;
+        }
+        if (txtApellido.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", "El apellido es obligatorio.");
+            return false;
+        }
+        if (txtTelefono.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", "El teléfono es obligatorio.");
+            return false;
+        }
+        if (cbEspecialidad.getValue() == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", "Seleccione una especialidad.");
+            return false;
+        }
         return true;
     }
+
+
+    private boolean validarCredenciales() {
+        if (txtUsuario.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", "El usuario es obligatorio.");
+            return false;
+        }
+        if (txtContrasena.getText().isBlank()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Validación", "La contraseña es obligatoria.");
+            return false;
+        }
+        return true;
+    }
+
+
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+
+
 }
