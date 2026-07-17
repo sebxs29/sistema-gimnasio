@@ -38,7 +38,8 @@
                     onAction="#abrirRutinas"/>
 
             <Button fx:id="btnAsignarRutinas"
-                    text="Asignar Rutinas"/>
+                    text="Asignar Rutinas"
+                    onAction="#abrirAsignacionRutinas"/>
 
             <Button fx:id="btnMiRutina"
                     text="Mi Rutina"/>

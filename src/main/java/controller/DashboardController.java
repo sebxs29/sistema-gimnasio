@@ -120,7 +120,10 @@ public class DashboardController {
         cargarVista("rutinas.fxml");
     }
 
-
+    @FXML
+    private void abrirAsignacionRutinas() {
+        cargarVista("asignacionRutina.fxml");
+    }
 
     @FXML
     private void cerrarSesion() {
