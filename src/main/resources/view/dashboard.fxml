@@ -1,60 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700.0" prefWidth="1100.0"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.DashboardController">
+<BorderPane prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
     <left>
 
-        <VBox fx:id="menuLateral"
-              spacing="10"
-              prefWidth="220"
-              styleClass="menu">
+        <VBox fx:id="menuLateral" prefWidth="220" spacing="10" styleClass="menu">
 
-            <Label text="Sistema Gimnasio"
-                   styleClass="titulo"/>
+            <Label styleClass="titulo" text="Sistema Gimnasio" />
 
-            <Button fx:id="btnClientes"
-                    text="Clientes"
-                    onAction="#abrirClientes"/>
+            <Button fx:id="btnClientes" onAction="#abrirClientes" text="Clientes" />
 
-            <Button fx:id="btnEntrenadores"
-                    text="Entrenadores"
-                    onAction="#abrirEntrenadores"/>
+            <Button fx:id="btnEntrenadores" onAction="#abrirEntrenadores" text="Entrenadores" />
 
-            <Button fx:id="btnPlanes"
-                    text="Planes"
-                    onAction="#abrirPlanes"/>
+            <Button fx:id="btnPlanes" onAction="#abrirPlanes" text="Planes" />
 
-            <Button fx:id="btnMembresias"
-                    text="Membresías"
-                    onAction="#abrirMembresias"/>
+            <Button fx:id="btnMembresias" onAction="#abrirMembresias" text="Membresías" />
 
-            <Button fx:id="btnRutinas"
-                    text="Rutinas"
-                    onAction="#abrirRutinas"/>
+            <Button fx:id="btnRutinas" onAction="#abrirRutinas" text="Rutinas" />
 
-            <Button fx:id="btnAsignarRutinas"
-                    text="Asignar Rutinas"
-                    onAction="#abrirAsignacionRutinas"/>
+            <Button fx:id="btnAsignarRutinas" onAction="#abrirAsignacionRutinas" text="Asignar Rutinas" />
 
-            <Button fx:id="btnMiRutina"
-                    text="Mi Rutina"/>
+            <Button fx:id="btnMiRutina" text="Mi Rutina" />
 
-            <Button fx:id="btnMiMembresia"
-                    text="Mi Membresía"/>
+            <Button fx:id="btnMiMembresia" onAction="#abrirMiMembresia" text="Mi Membresía" />
 
-            <Button fx:id="btnReportes"
-                    text="Reportes"/>
+            <Button fx:id="btnReportes" text="Reportes" />
 
-            <Pane VBox.vgrow="ALWAYS"/>
+            <Pane VBox.vgrow="ALWAYS" />
 
-            <Button fx:id="btnCerrarSesion"
-                    text="Cerrar Sesión"
-                    onAction="#cerrarSesion"/>
+            <Button fx:id="btnCerrarSesion" onAction="#cerrarSesion" text="Cerrar Sesión" />
 
         </VBox>
 
@@ -64,8 +44,7 @@
 
     <center>
 
-        <AnchorPane fx:id="paneContenido"
-                    styleClass="contenido"/>
+        <AnchorPane fx:id="paneContenido" styleClass="contenido" />
 
     </center>
 
