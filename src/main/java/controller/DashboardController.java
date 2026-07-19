@@ -138,4 +138,29 @@ public class DashboardController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void abrirMiMembresia() {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/view/mi_membresia.fxml")
+            );
+
+            Node node = loader.load();
+
+            MiMembresiaController controller = loader.getController();
+            controller.setUsuario(usuario);
+
+            paneContenido.getChildren().setAll(node);
+
+            AnchorPane.setTopAnchor(node, 0.0);
+            AnchorPane.setBottomAnchor(node, 0.0);
+            AnchorPane.setLeftAnchor(node, 0.0);
+            AnchorPane.setRightAnchor(node, 0.0);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -139,4 +139,52 @@ public class MembresiaDAO {
 
     }
 
+    public Membresia buscarPorUsuario(int usuarioId) throws SQLException {
+
+        String sql = """
+                SELECT m.id, m.cliente_id, m.plan_id,
+                CONCAT(c.nombre, ' ', c.apellido) AS cliente_nombre,
+                p.nombre AS plan_nombre,
+                m.fecha_inicio,
+                m.fecha_fin,
+                m.estado
+                FROM membresias m
+                JOIN clientes c
+                ON m.cliente_id = c.id
+                JOIN planes p
+                ON m.plan_id = p.id
+                WHERE c.usuario_id = ?
+                ORDER BY m.fecha_inicio DESC, m.id DESC
+                LIMIT 1
+                """;
+
+        try (Connection connection = Conexion.getConexion();
+        PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, usuarioId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+
+                    return new Membresia(
+                            rs.getInt("id"),
+                            rs.getInt("cliente_id"),
+                            rs.getInt("plan_id"),
+                            rs.getString("cliente_nombre"),
+                            rs.getString("plan_nombre"),
+                            rs.getDate("fecha_inicio").toLocalDate(),
+                            rs.getDate("fecha_fin").toLocalDate(),
+                            rs.getString("estado")
+                    );
+
+                }
+
+            }
+
+        }
+
+        return null;
+    }
+
 }
