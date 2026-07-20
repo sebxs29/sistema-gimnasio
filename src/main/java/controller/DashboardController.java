@@ -163,4 +163,29 @@ public class DashboardController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void abrirMiRutina() {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/view/miRutina.fxml")
+            );
+
+            Node node = loader.load();
+
+            MiRutinaController controller = loader.getController();
+            controller.setUsuario(usuario);
+
+            paneContenido.getChildren().setAll(node);
+
+            AnchorPane.setTopAnchor(node, 0.0);
+            AnchorPane.setBottomAnchor(node, 0.0);
+            AnchorPane.setLeftAnchor(node, 0.0);
+            AnchorPane.setRightAnchor(node, 0.0);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

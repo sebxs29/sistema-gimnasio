@@ -26,7 +26,7 @@
 
             <Button fx:id="btnAsignarRutinas" onAction="#abrirAsignacionRutinas" text="Asignar Rutinas" />
 
-            <Button fx:id="btnMiRutina" text="Mi Rutina" />
+            <Button fx:id="btnMiRutina" onAction="#abrirMiRutina" text="Mi Rutina" />
 
             <Button fx:id="btnMiMembresia" onAction="#abrirMiMembresia" text="Mi Membresía" />
 
