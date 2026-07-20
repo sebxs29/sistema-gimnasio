@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="650.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RutinaController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="650.0" spacing="20.0" styleClass="vista" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RutinaController">
     <children>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="header-bar">
             <children>
-                <Label text="GESTIÓN DE RUTINAS" />
+                <Label styleClass="titulo-vista" text="GESTIÓN DE RUTINAS" />
             </children>
         </HBox>
         <GridPane hgap="20.0" vgap="20.0">
@@ -42,10 +42,10 @@
         </GridPane>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#guardarRutina" text="Guardar" />
-                <Button mnemonicParsing="false" onAction="#actualizarRutina" text="Actualizar" />
-                <Button mnemonicParsing="false" onAction="#eliminarRutina" text="Eliminar" />
-                <Button mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar" />
+                <Button mnemonicParsing="false" onAction="#guardarRutina" styleClass="btn-primary" text="Guardar" />
+                <Button mnemonicParsing="false" onAction="#actualizarRutina" styleClass="btn-secondary" text="Actualizar" />
+                <Button mnemonicParsing="false" onAction="#eliminarRutina" styleClass="btn-danger" text="Eliminar" />
+                <Button mnemonicParsing="false" onAction="#limpiarCampos" styleClass="btn-neutral" text="Limpiar" />
             </children>
             <padding>
                 <Insets bottom="10.0" top="10.0" />

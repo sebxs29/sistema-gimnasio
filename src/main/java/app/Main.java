@@ -10,6 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
         Scene scene = new Scene(loader.load());
+        scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
         primaryStage.setTitle("LOGIN");
         primaryStage.setScene(scene);
         primaryStage.show();

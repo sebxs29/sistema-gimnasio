@@ -55,7 +55,9 @@ public class LoginController {
             dashboardController.setUsuario(usuario);
 
             Stage stage = (Stage) txtUsuario.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
+            stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
