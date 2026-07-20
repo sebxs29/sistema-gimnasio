@@ -15,6 +15,10 @@ public class AsignacionRutina {
     private String rutinaNombre;
     private String entrenadorNombre;
 
+    // CAMPOS EXTRA SOLO PARA MOSTRAR EN "MI RUTINA" (NO SE INSERTAN, SE LLENAN CON UN JOIN)
+    private String rutinaDescripcion;
+    private String rutinaNivel;
+
     // CONSTRUCTOR PARA INSERTAR
     public AsignacionRutina(int clienteId, int rutinaId, int entrenadorId, LocalDate fechaAsignacion) {
         setClienteId(clienteId);
@@ -45,6 +49,18 @@ public class AsignacionRutina {
         this.clienteNombre = clienteNombre;
         this.rutinaNombre = rutinaNombre;
         this.entrenadorNombre = entrenadorNombre;
+    }
+
+    // CONSTRUCTOR PARA LEER CON JOIN COMPLETO (VISTA "MI RUTINA" DEL CLIENTE)
+    public AsignacionRutina(int id, int rutinaId, String rutinaNombre, String rutinaDescripcion,
+                            String rutinaNivel, String entrenadorNombre, LocalDate fechaAsignacion) {
+        setId(id);
+        this.rutinaId = rutinaId;
+        this.rutinaNombre = rutinaNombre;
+        this.rutinaDescripcion = rutinaDescripcion;
+        this.rutinaNivel = rutinaNivel;
+        this.entrenadorNombre = entrenadorNombre;
+        setFechaAsignacion(fechaAsignacion);
     }
 
     public void setId(int id) {
@@ -117,5 +133,13 @@ public class AsignacionRutina {
 
     public String getEntrenadorNombre() {
         return entrenadorNombre;
+    }
+
+    public String getRutinaDescripcion() {
+        return rutinaDescripcion;
+    }
+
+    public String getRutinaNivel() {
+        return rutinaNivel;
     }
 }

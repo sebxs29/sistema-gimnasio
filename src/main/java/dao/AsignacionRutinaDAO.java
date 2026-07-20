@@ -71,6 +71,50 @@ public class AsignacionRutinaDAO {
         return lista;
     }
 
+    // BUSCA LA ULTIMA RUTINA ASIGNADA AL CLIENTE ASOCIADO AL USUARIO (VISTA "MI RUTINA")
+    public AsignacionRutina buscarPorUsuario(int usuarioId) throws SQLException {
+
+        String sql = """
+                SELECT ar.id,
+                       ar.rutina_id, r.nombre AS rutina_nombre,
+                       r.descripcion AS rutina_descripcion,
+                       r.nivel AS rutina_nivel,
+                       e.nombre || ' ' || e.apellido AS entrenador_nombre,
+                       ar.fecha_asignacion
+                FROM asignacion_rutinas ar
+                JOIN clientes c ON ar.cliente_id = c.id
+                JOIN rutinas r ON ar.rutina_id = r.id
+                JOIN entrenadores e ON ar.entrenador_id = e.id
+                WHERE c.usuario_id = ?
+                ORDER BY ar.fecha_asignacion DESC, ar.id DESC
+                LIMIT 1
+                """;
+
+        try (Connection connection = Conexion.getConexion();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, usuarioId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+
+                    return new AsignacionRutina(
+                            rs.getInt("id"),
+                            rs.getInt("rutina_id"),
+                            rs.getString("rutina_nombre"),
+                            rs.getString("rutina_descripcion"),
+                            rs.getString("rutina_nivel"),
+                            rs.getString("entrenador_nombre"),
+                            rs.getDate("fecha_asignacion").toLocalDate()
+                    );
+                }
+            }
+        }
+
+        return null;
+    }
+
     public void actualizar(AsignacionRutina asignacion) throws SQLException {
 
         String sql = """
