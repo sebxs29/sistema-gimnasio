@@ -3,13 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EntrenadorController">
+<AnchorPane styleClass="vista" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EntrenadorController">
 
     <children>
 
         <VBox spacing="15" AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="15" AnchorPane.rightAnchor="15" AnchorPane.topAnchor="15">
 
-            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="GESTIÓN DE ENTRENADORES" />
+            <Label styleClass="titulo-vista" text="GESTIÓN DE ENTRENADORES" />
 
             <Separator />
 
@@ -35,31 +35,31 @@
 
                 <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
                 <PasswordField fx:id="txtContrasena" promptText="Ingrese la contraseña" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-            </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                </rowConstraints>
 
             </GridPane>
 
             <HBox spacing="10">
 
-                <Button onAction="#guardar" text="Guardar" />
+                <Button onAction="#guardar" styleClass="btn-primary" text="Guardar" />
 
-                <Button onAction="#actualizar" text="Actualizar" />
+                <Button onAction="#actualizar" styleClass="btn-secondary" text="Actualizar" />
 
-                <Button onAction="#eliminar" text="Eliminar" />
+                <Button onAction="#eliminar" styleClass="btn-danger" text="Eliminar" />
 
-                <Button onAction="#limpiar" text="Limpiar" />
+                <Button onAction="#limpiar" styleClass="btn-neutral" text="Limpiar" />
 
             </HBox>
 
@@ -80,9 +80,9 @@
                     <TableColumn fx:id="colTelefono" prefWidth="120" text="Teléfono" />
 
                 </columns>
-            <columnResizePolicy>
-               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-            </columnResizePolicy>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
 
             </TableView>
 

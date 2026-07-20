@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AsignacionRutinaController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" spacing="20.0" styleClass="vista" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AsignacionRutinaController">
     <children>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="header-bar">
             <children>
-                <Label text="ASIGNACIÓN DE RUTINAS" />
+                <Label styleClass="titulo-vista" text="ASIGNACIÓN DE RUTINAS" />
             </children>
         </HBox>
         <GridPane hgap="20.0" vgap="20.0">
@@ -44,10 +44,10 @@
         </GridPane>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#guardarAsignacion" text="Guardar" />
-                <Button mnemonicParsing="false" onAction="#actualizarAsignacion" text="Actualizar" />
-                <Button mnemonicParsing="false" onAction="#eliminarAsignacion" text="Eliminar" />
-                <Button mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar" />
+                <Button mnemonicParsing="false" onAction="#guardarAsignacion" styleClass="btn-primary" text="Guardar" />
+                <Button mnemonicParsing="false" onAction="#actualizarAsignacion" styleClass="btn-secondary" text="Actualizar" />
+                <Button mnemonicParsing="false" onAction="#eliminarAsignacion" styleClass="btn-danger" text="Eliminar" />
+                <Button mnemonicParsing="false" onAction="#limpiarCampos" styleClass="btn-neutral" text="Limpiar" />
             </children>
             <padding>
                 <Insets bottom="10.0" top="10.0" />

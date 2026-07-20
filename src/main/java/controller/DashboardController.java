@@ -131,6 +131,7 @@ public class DashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
             Stage stage = (Stage) btnCerrarSesion.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
@@ -168,9 +169,7 @@ public class DashboardController {
     private void abrirMiRutina() {
 
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/view/miRutina.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/miRutina.fxml"));
 
             Node node = loader.load();
 

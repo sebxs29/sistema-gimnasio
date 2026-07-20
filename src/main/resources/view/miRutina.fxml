@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MiRutinaController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" spacing="20.0" styleClass="vista" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MiRutinaController">
     <children>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="header-bar">
             <children>
-                <Label text="Mi Rutina" />
+                <Label styleClass="titulo-vista" text="Mi Rutina" />
             </children>
         </HBox>
         <GridPane hgap="20.0" vgap="20.0">
