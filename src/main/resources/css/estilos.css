@@ -274,3 +274,109 @@
     -fx-text-fill: -color-primary-dark;
     -fx-letter-spacing: 1px;
 }
+
+
+/* =========================
+   REPORTES
+   ========================= */
+
+.reportes-root {
+    -fx-alignment: TOP_CENTER;
+    -fx-spacing: 28;
+    -fx-padding: 35 50 35 50;
+    -fx-background-color: -color-bg;
+}
+
+.label.subtitulo-vista {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: -color-text-muted;
+}
+
+.reportes-grid {
+    -fx-alignment: CENTER;
+    -fx-hgap: 25;
+    -fx-vgap: 25;
+}
+
+.reporte-card {
+    -fx-background-color: -color-panel;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-width: 4 1 1 1;
+    -fx-border-color: -color-primary -color-border -color-border -color-border;
+
+    -fx-alignment: CENTER;
+    -fx-spacing: 12;
+
+    -fx-pref-width: 320;
+    -fx-pref-height: 150;
+    -fx-min-width: 280;
+    -fx-min-height: 140;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.12),
+            12,
+            0,
+            0,
+            4
+    );
+}
+
+.reporte-card:hover {
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(62, 142, 126, 0.25),
+            16,
+            0,
+            0,
+            5
+    );
+}
+
+.label.reporte-titulo {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-muted;
+}
+
+.label.reporte-numero {
+    -fx-font-size: 36px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -color-primary-dark;
+}
+
+/* Variación para cada tarjeta */
+
+.reporte-clientes {
+    -fx-border-color: -color-primary -color-border -color-border -color-border;
+}
+
+.reporte-entrenadores {
+    -fx-border-color: #4A90A4 -color-border -color-border -color-border;
+}
+
+.reporte-planes {
+    -fx-border-color: #8B6FB3 -color-border -color-border -color-border;
+}
+
+.reporte-rutinas {
+    -fx-border-color: -color-accent -color-border -color-border -color-border;
+}
+
+.reporte-clientes .reporte-numero {
+    -fx-text-fill: -color-primary;
+}
+
+.reporte-entrenadores .reporte-numero {
+    -fx-text-fill: #4A90A4;
+}
+
+.reporte-planes .reporte-numero {
+    -fx-text-fill: #8B6FB3;
+}
+
+.reporte-rutinas .reporte-numero {
+    -fx-text-fill: -color-accent;
+}}

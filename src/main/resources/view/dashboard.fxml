@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -14,13 +13,6 @@
         <VBox fx:id="menuLateral" prefWidth="220" spacing="10" styleClass="menu">
 
             <Label styleClass="titulo" text="Sistema Gimnasio" />
-
-            <VBox spacing="6.0" styleClass="usuario-sidebar">
-                <Label fx:id="lblUsuarioSidebar" styleClass="usuario-nombre" text="Usuario" />
-                <Label fx:id="lblRolSidebar" styleClass="rol-badge" text="Rol" />
-            </VBox>
-
-            <Separator styleClass="menu-separador" />
 
             <Button fx:id="btnClientes" onAction="#abrirClientes" text="Clientes" />
 
@@ -38,7 +30,7 @@
 
             <Button fx:id="btnMiMembresia" onAction="#abrirMiMembresia" text="Mi Membresía" />
 
-            <Button fx:id="btnReportes" text="Reportes" />
+            <Button fx:id="btnReportes" onAction="#abrirReportes" text="Reportes" />
 
             <Pane VBox.vgrow="ALWAYS" />
 

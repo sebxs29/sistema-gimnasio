@@ -5,11 +5,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    private static final String URL = "jdbc:postgresql://localhost:5432/gimnasio_db";
-    private static final String USUARIO = "postgres";
-    private static final String CONTRASENA = "123456";
+
+    private static final String DATABASE_URL =
+            System.getenv("DATABASE_URL");
 
     public static Connection getConexion() throws SQLException {
-        return DriverManager.getConnection(URL, USUARIO, CONTRASENA);
+
+        if (DATABASE_URL == null || DATABASE_URL.isBlank()) {
+            throw new SQLException(
+                    "No se configuró la variable de entorno DATABASE_URL"
+            );
+        }
+
+        return DriverManager.getConnection(DATABASE_URL);
     }
 }

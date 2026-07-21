@@ -217,4 +217,9 @@ public class DashboardController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void abrirReportes() {
+        cargarVista("reportes.fxml");
+    }
 }
