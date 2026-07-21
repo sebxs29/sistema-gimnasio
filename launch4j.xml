@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\sebxs29\Documents\Universidad\Semestre_3_2026_A\POO\sistema-gimnasio\target\sistema-gimnasio-1.0.0-all.jar</jar>
+  <outfile>C:\Users\sebxs29\Documents\Universidad\Semestre_3_2026_A\POO\sistema-gimnasio-instalado\SistemaGimnasio.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <jre>
+    <path>runtime</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>true</requires64Bit>
+    <minVersion>26.0.1</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>
