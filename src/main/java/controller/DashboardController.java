@@ -2,11 +2,14 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Usuario;
 
@@ -32,8 +35,35 @@ public class DashboardController {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
         configurarMenu();
+        mostrarBienvenida();
     }
 
+    // MUESTRA UN MENSAJE DE BIENVENIDA CON EL USUARIO Y SU ROL, EN VEZ DE DEJAR EL PANEL EN BLANCO
+    private void mostrarBienvenida() {
+
+        String rolTexto = switch (usuario.getRol()) {
+            case "ADMINISTRADOR" -> "Administrador";
+            case "ENTRENADOR" -> "Entrenador";
+            case "CLIENTE" -> "Cliente";
+            default -> usuario.getRol();
+        };
+
+        Label lblTitulo = new Label("¡Bienvenido, " + usuario.getUsuario() + "!");
+        lblTitulo.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
+
+        Label lblRol = new Label("Rol: " + rolTexto);
+        lblRol.setStyle("-fx-font-size: 14px;");
+
+        VBox contenedor = new VBox(10, lblTitulo, lblRol);
+        contenedor.setAlignment(Pos.CENTER);
+
+        paneContenido.getChildren().setAll(contenedor);
+
+        AnchorPane.setTopAnchor(contenedor, 0.0);
+        AnchorPane.setBottomAnchor(contenedor, 0.0);
+        AnchorPane.setLeftAnchor(contenedor, 0.0);
+        AnchorPane.setRightAnchor(contenedor, 0.0);
+    }
 
     private void ocultarTodo() {
         ocultarBoton(btnClientes);
