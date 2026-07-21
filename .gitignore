@@ -44,3 +44,12 @@ logs/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+### Empaquetado de aplicación ###
+dist/
+dist-test/
+*.exe
+*.msi
+
+### Configuración privada ###
+config.properties
