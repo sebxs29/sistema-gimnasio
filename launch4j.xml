@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon></icon>
+  <icon>C:\Users\sebxs29\Documents\Universidad\Semestre_3_2026_A\POO\sistema-gimnasio-instalado\gimnasio.ico</icon>
   <jre>
     <path>runtime</path>
     <requiresJdk>false</requiresJdk>

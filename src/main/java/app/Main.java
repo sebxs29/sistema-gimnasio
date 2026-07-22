@@ -3,7 +3,10 @@ package app;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.InputStream;
 
 public class Main extends Application {
     @Override
@@ -11,6 +14,13 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
         Scene scene = new Scene(loader.load());
         scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
+
+        InputStream icono = getClass().getResourceAsStream("/img/gimnasio.png");
+
+        if (icono != null) {
+            primaryStage.getIcons().add(new Image(icono));
+        }
+
         primaryStage.setTitle("LOGIN");
         primaryStage.setScene(scene);
         primaryStage.show();
