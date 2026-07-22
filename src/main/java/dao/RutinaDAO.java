@@ -10,8 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RutinaDAO {
+public class RutinaDAO implements ICRUD<Rutina>{
 
+    @Override
     public void guardar(Rutina rutina) throws SQLException {
         String sql = """
                 INSERT INTO rutinas(nombre, descripcion, nivel)
@@ -26,6 +27,7 @@ public class RutinaDAO {
         }
     }
 
+    @Override
     public List<Rutina> listar() throws SQLException {
         List<Rutina> lista = new ArrayList<>();
         String sql = """
@@ -44,6 +46,7 @@ public class RutinaDAO {
         return lista;
     }
 
+    @Override
     public void actualizar(Rutina rutina) throws SQLException {
         String sql = """
                 UPDATE rutinas
@@ -66,6 +69,7 @@ public class RutinaDAO {
         }
     }
 
+    @Override
     public void eliminar(int id) throws SQLException {
 
         String sql = """

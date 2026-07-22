@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDAO {
+public class ClienteDAO{
 
     public void guardar(Cliente cliente, String usuario, String contrasena) throws SQLException {
 

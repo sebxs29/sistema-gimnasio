@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import model.Usuario;
 
 import java.io.IOException;
+import model.BienvenidaRol;
 
 public class DashboardController {
 
@@ -38,23 +39,50 @@ public class DashboardController {
         mostrarBienvenida();
     }
 
-    // MUESTRA UN MENSAJE DE BIENVENIDA CON EL USUARIO Y SU ROL, EN VEZ DE DEJAR EL PANEL EN BLANCO
+    // MUESTRA UNA BIENVENIDA PERSONALIZADA SEGÚN EL ROL DEL USUARIO
     private void mostrarBienvenida() {
 
-        String rolTexto = switch (usuario.getRol()) {
-            case "ADMINISTRADOR" -> "Administrador";
-            case "ENTRENADOR" -> "Entrenador";
-            case "CLIENTE" -> "Cliente";
-            default -> usuario.getRol();
-        };
+        BienvenidaRol bienvenida = BienvenidaRol.crear(
+                usuario.getUsuario(),
+                usuario.getRol()
+        );
 
-        Label lblTitulo = new Label("¡Bienvenido, " + usuario.getUsuario() + "!");
-        lblTitulo.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
+        Label lblTitulo = new Label(
+                bienvenida.obtenerTitulo()
+        );
 
-        Label lblRol = new Label("Rol: " + rolTexto);
-        lblRol.setStyle("-fx-font-size: 14px;");
+        lblTitulo.setStyle(
+                "-fx-font-size: 22px;"
+                        + "-fx-font-weight: bold;"
+        );
 
-        VBox contenedor = new VBox(10, lblTitulo, lblRol);
+        Label lblRol = new Label(
+                "Rol: " + bienvenida.obtenerNombreRol()
+        );
+
+        lblRol.setStyle(
+                "-fx-font-size: 14px;"
+        );
+
+        Label lblMensaje = new Label(
+                bienvenida.obtenerMensaje()
+        );
+
+        lblMensaje.setStyle(
+                "-fx-font-size: 13px;"
+                        + "-fx-text-fill: #555555;"
+        );
+
+        lblMensaje.setWrapText(true);
+        lblMensaje.setMaxWidth(450);
+
+        VBox contenedor = new VBox(
+                10,
+                lblTitulo,
+                lblRol,
+                lblMensaje
+        );
+
         contenedor.setAlignment(Pos.CENTER);
 
         paneContenido.getChildren().setAll(contenedor);

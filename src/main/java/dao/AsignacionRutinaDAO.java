@@ -11,8 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AsignacionRutinaDAO {
+public class AsignacionRutinaDAO implements ICRUD<AsignacionRutina>{
 
+    @Override
     public void guardar(AsignacionRutina asignacion) throws SQLException {
 
         String sql = """
@@ -32,6 +33,7 @@ public class AsignacionRutinaDAO {
         }
     }
 
+    @Override
     // LISTA CON JOIN PARA MOSTRAR NOMBRES DE CLIENTE, RUTINA Y ENTRENADOR EN LA TABLA
     public List<AsignacionRutina> listar() throws SQLException {
 
@@ -114,7 +116,7 @@ public class AsignacionRutinaDAO {
 
         return null;
     }
-
+    @Override
     public void actualizar(AsignacionRutina asignacion) throws SQLException {
 
         String sql = """
@@ -143,6 +145,7 @@ public class AsignacionRutinaDAO {
         }
     }
 
+    @Override
     public void eliminar(int id) throws SQLException {
 
         String sql = """

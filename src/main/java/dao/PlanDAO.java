@@ -10,8 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanDAO {
+public class PlanDAO implements ICRUD<Plan>{
 
+    @Override
     public void guardar(Plan plan) throws SQLException {
 
         String sql = """
@@ -32,6 +33,7 @@ public class PlanDAO {
 
     }
 
+    @Override
     public List<Plan> listar() throws SQLException {
 
         List<Plan> lista = new ArrayList<>();
@@ -60,6 +62,7 @@ public class PlanDAO {
 
     }
 
+    @Override
     public void actualizar(Plan plan) throws SQLException {
 
         String sql = """
@@ -87,6 +90,7 @@ public class PlanDAO {
         }
     }
 
+    @Override
     public void eliminar(int id) throws SQLException {
 
         String sql = """

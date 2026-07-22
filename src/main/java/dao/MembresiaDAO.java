@@ -7,8 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MembresiaDAO {
+public class MembresiaDAO implements ICRUD<Membresia>{
 
+    @Override
     public void guardar(Membresia membresia) throws SQLException {
 
         String sql = """
@@ -41,6 +42,7 @@ public class MembresiaDAO {
 
     }
 
+    @Override
     public List<Membresia> listar() throws SQLException {
 
         List<Membresia> membresias = new ArrayList<>();
@@ -85,6 +87,7 @@ public class MembresiaDAO {
         return membresias;
     }
 
+    @Override
     public void actualizar(Membresia membresia) throws SQLException {
 
         String sql = """
@@ -117,6 +120,7 @@ public class MembresiaDAO {
 
     }
 
+    @Override
     public void eliminar(int id) throws SQLException {
 
         String sql = """
