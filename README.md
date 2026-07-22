@@ -58,6 +58,17 @@ Puede consultar:
 - Su membresía.
 - Su rutina asignada.
 
+## Credenciales de prueba
+
+Para facilitar la evaluación y las pruebas del sistema, se incluyen las siguientes credenciales predeterminadas:
+
+| Rol | Usuario | Contraseña |
+|------|----------|------------|
+| **Administrador** | `admin` | `123456` |
+| **Entrenador** | `entrenador` | `123456` |
+| **Cliente** | `cliente` | `123456` |
+
+
 ## Tecnologías utilizadas
 
 - **Java**
